@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Погода</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-control {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Погода</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Получить прогноз</button>
+    </form>
+    {% if weather_data %}
+        {% if weather_data.error %}
+            <p class="error-message">{{ weather_data.error }}</p>
+        {% else %}
+            {% if form.is_bound %}
+    {% if form.is_valid %}
+        <h2>Погода в {{ form.cleaned_data.city }}</h2>
+    {% endif %}
+{% endif %}
+            <ul>
+                {% for data in weather_data.hourly_weather %}
+                    <li>{{ data.time }}: {{ data.temperature }}°C</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+    <h2>История поиска</h2>
+    <ul>
+        {% for entry in search_history %}
+            <li>{{ entry.city }} - {{ entry.request_count }} запросов (Последний поиск: {{ entry.last_search_date|date:"Y-m-d H:i:s" }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
