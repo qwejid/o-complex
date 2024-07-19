@@ -5,13 +5,14 @@ services:
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env.docker
     environment:
       - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${PG_PASSWORD}
       - POSTGRES_DB=${PG_DATABASE}
-    env_file:
-      - .env.docker
-
+    ports:
+      - "5432:5432"
   web:
     build: .
     command: ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
@@ -28,7 +29,7 @@ services:
       - PG_DATABASE=${PG_DATABASE}
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=db
       - DB_PORT=${DB_PORT}
     depends_on:
       - db
