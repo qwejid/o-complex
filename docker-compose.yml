@@ -19,19 +19,18 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    environment:
-      - SECRET_KEY=django-insecure-w@wh3_ecu9jayqu@!69fawwxjcv!!8r#6-#!8(h(&^@5x9%l+i
-      - DEBUG=True
-      - ALLOWED_HOSTS='127.0.0.1 localhost web'
-      - PG_DATABASE=weather_app
-      - PG_USER=postgres
-      - PG_PASSWORD=dbsb3272
-      - DB_HOST=db
-      - DB_PORT=5432
     env_file:
       - .env.docker
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - PG_DATABASE=${PG_DATABASE}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
     depends_on:
       - db
-
 volumes:
   postgres_data:
