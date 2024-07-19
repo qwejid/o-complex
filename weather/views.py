@@ -73,3 +73,5 @@ def city_request_count(request, city):
     city_record = CityWeatherRequest.objects.filter(city=city, session_key=session_key).first()
     count = city_record.request_count if city_record else 0
     return JsonResponse({'city': city, 'count': count})
+
+
