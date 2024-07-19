@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 70%;
+    margin-right: 10px;
+}
+
+form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.weather-display {
+    text-align: center;
+}
+
+.current-weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.temp-now {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feels-like {
+    font-size: 18px;
+    color: #888;
+}
+
+.hourly-weather {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.hour-block {
+    text-align: center;
+    width: 10%;
+}
+
+.hour {
+    font-size: 14px;
+}
+
+.icon {
+    font-size: 24px;
+}
+
+.temp {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.forecast {
+    display: flex;
+    justify-content: space-around;
+}
+
+.day-forecast {
+    text-align: center;
+}
+
+.temp-range {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.precipitation {
+    font-size: 14px;
+    color: #888;
+}
+
+.search-history {
+    margin-top: 20px;
+}
+
+#history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#history-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#history-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
