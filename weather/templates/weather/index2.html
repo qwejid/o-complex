@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода в городе</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Погода</h1>
+        <div class="search-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Получить прогноз</button>
+            </form>
+        </div>
+
+        {% if weather_data %}
+            {% if weather_data.error %}
+                <p class="error-message">{{ weather_data.error }}</p>
+            {% else %}
+                <div class="weather-display">
+                    {% if form.is_bound and form.is_valid %}
+                        <h2>Погода в {{ form.cleaned_data.city }}</h2>
+                    {% endif %}
+                    
+                    <div class="current-weather">
+                        <h2>Сейчас</h2>
+                        <div class="temp-now">{{ weather_data.hourly_weather.0.temperature }}°C</div>                        
+                    </div>
+
+                    <div class="hourly-weather">
+                        {% for data in weather_data.hourly_weather|slice:"1:" %}
+                            <div class="hour-block">
+                                <div class="hour">{{ data.time }}</div>
+                                <div class="temp">{{ data.temperature }}°C</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="forecast">
+                        {% for day in weather_data.daily %}
+                            <div class="day-forecast">
+                                <h3>{{ day.date }}</h3>
+                                <div class="temp-range">{{ day.min_temp }} / {{ day.max_temp }}°C</div>
+                                {% if day.precipitation %}
+                                    <div class="precipitation">{{ day.precipitation }} мм</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="search-history">
+            <h2>История поиска</h2>
+            <ul id="history-list">
+                {% for entry in search_history %}
+                    <li>{{ entry.city }} - {{ entry.request_count }} запросов (Последний поиск: {{ entry.last_search_date|date:"Y-m-d H:i:s" }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

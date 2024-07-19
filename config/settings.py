@@ -11,8 +11,7 @@ environ.Env.read_env(env.str(root(), '.env'))
 BASE_DIR = root()
 SECRET_KEY = env.str('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
-ALLOWED_HOSTS = env.str('ALLOWED_HOSTS', default='').split(' ')
-
+ALLOWED_HOSTS = env.str('ALLOWED_HOSTS', default='web').split(' ')
 
 # Application definition
 
@@ -39,7 +38,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "app.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -57,7 +56,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "app.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
@@ -69,7 +68,7 @@ DATABASES = {
         "NAME": env.str('PG_DATABASE', 'postgres'),
         "USER": env.str('PG_USER', 'postgres'),
         "PASSWORD": env.str('PG_PASSWORD', 'postgres'),
-        "HOST": env.str('DB_HOST', 'localhost'),
+        "HOST": env.str('DB_HOST', 'db'),
         "PORT": env.int('DB_PORT', 5432),
     },
     'extra': {
@@ -115,6 +114,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

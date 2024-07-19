@@ -60,13 +60,13 @@ def index(request):
     if last_city:
         form = CityForm(initial={'city': last_city})
 
-    search_history = CityWeatherRequest.objects.filter(session_key=session_key).order_by('-last_search_date')[:3]
+    search_history = CityWeatherRequest.objects.filter(session_key=session_key).order_by('-last_search_date')[:5]
     context = {
         'form': form,
         'weather_data': weather_data,
         'search_history': search_history,
     }
-    return render(request, 'weather/index.html', context=context)
+    return render(request, 'weather/index2.html', context=context)
 
 def city_request_count(request, city):
     session_key = request.session.session_key

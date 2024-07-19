@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import SearchHistory
+from .models import CityWeatherRequest
 
 class WeatherAppTests(TestCase):
     def setUp(self):
@@ -10,4 +10,4 @@ class WeatherAppTests(TestCase):
         self.client.login(username='testuser', password='password')
         response = self.client.post('/', {'city': 'London'})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(SearchHistory.objects.filter(user=self.user, city='London').exists())
+        self.assertTrue(CityWeatherRequest.objects.filter(user=self.user, city='London').exists())
