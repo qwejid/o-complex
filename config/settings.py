@@ -9,7 +9,7 @@ environ.Env.read_env(env.str(root(), '.env'))
 
 
 BASE_DIR = root()
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = "django-insecure-w@wh3_ecu9jayqu@!69fawwxjcv!!8r#6-#!8(h(&^@5x9%l+i" # вообще надо так env.str('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 ALLOWED_HOSTS = env.str('ALLOWED_HOSTS', default='web').split(' ')
 
